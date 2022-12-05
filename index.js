@@ -30,10 +30,15 @@ console.log('örnek görev:', ilkiniDon(['as','sa'],function(metin){return metin
   Aşağıdaki skor1 ve skor2 kodlarını inceleyiniz ve aşağıdaki soruları altına not alarak cevaplayın
   
   1. skor1 ve skor2 arasındaki fark nedir?
-  
+    a- skor1'de değişken fonksiyonun içinde tanımlanırken, skor2'de değişken fonksiyon dışında (global scope'da) tanımlanmıştır.
+    b- Ek olarak, skor1'de nested fonksiyon kullanılarak skor arttırılmaktadır.
+
+
   2. Hangisi bir closure kullanmaktadır? Nasıl tarif edebilirsin? (yarınki derste öğreneceksin :) )
-  
+    a- skor2 closure kullanmaktadır, çünkü fonksiyon içerisinde return edilen 'skor' değişkeni tanımlanmadan kullanılırken, global scope'ta tanımlanan 'skor' değişkeninden faydalanılmaktadır.
+
   3. Hangi durumda skor1 tercih edilebilir? Hangi durumda skor2 daha mantıklıdır?
+    a- cevap yok.
 */
 
 // skor1 kodları
@@ -64,10 +69,12 @@ Aşağıdaki takimSkoru() fonksiyonununda aşağıdakileri yapınız:
 Not: Bu fonskiyon, aşağıdaki diğer görevler için de bir callback fonksiyonu olarak da kullanılacak
 */
 
-function takimSkoru(/*Kodunuzu buraya yazınız*/){
-    /*Kodunuzu buraya yazınız*/
+function takimSkoru(){
+  let ceyrekSkor = Math.floor(Math.random()*25);
+  return ceyrekSkor;
 }
 
+console.log(takimSkoru());
 
 
 
@@ -86,13 +93,22 @@ Aşağıdaki macSonucu() fonksiyonununda aşağıdakileri yapınız:
 }
 */ 
 
-function macSonucu(/*Kodunuzu buraya yazınız*/){
-  /*Kodunuzu buraya yazınız*/
+function macSonucu(ceyrekSkor, ceyrekSayisi){
+  let evSahibiSkor = 0;
+  let konukTakimSkor = 0;
+  let bitisSkoru = {};
+
+  for (let i = 0; i < ceyrekSayisi; i++){
+    evSahibiSkor += ceyrekSkor();
+    konukTakimSkor += ceyrekSkor();
+  }
+  bitisSkoru['EvSahibi']=evSahibiSkor;
+  bitisSkoru.KonukTakim=konukTakimSkor;
+
+  return bitisSkoru;
 }
 
-
-
-
+console.log(macSonucu(takimSkoru, 4));
 
 
 /* Zorlayıcı Görev 4: periyotSkoru()
@@ -109,10 +125,18 @@ Aşağıdaki periyotSkoru() fonksiyonununda aşağıdakileri yapınız:
   */
 
 
-function periyotSkoru(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
-
+function periyotSkoru(skor) {
+  let evSahibiSkor = skor();
+  let konukTakimSkor = skor();
+  let sonuc = {
+    EvSahibi: evSahibiSkor,
+    KonukTakim: konukTakimSkor
+  };
+  
+  return sonuc;
 }
+
+console.log(periyotSkoru(takimSkoru));
 
 
 /* Zorlayıcı Görev 5: skorTabelasi() 
